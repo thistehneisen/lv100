@@ -1,0 +1,1 @@
+<a class="button filled gray" href="#"><span>Filled gray</span></a>

@@ -1,0 +1,1 @@
+<a class="button outline red" href="#"><span>Outline red</span></a>
