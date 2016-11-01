@@ -1,0 +1,10 @@
+.idea/
+.DS_Store
+.git/
+.Trash*
+/Library/vendor/
+/Library/composer.json
+/SiteContent/assets/css/bak/
+/Uploads/
+/Cache/
+/CronJobs/Logs/

@@ -1,0 +1,356 @@
+/* Komentāri */	
+
+.bolder{
+font-weight: bold;
+font-size: 14px;	
+}
+.text-blue{
+font-size: 14px;
+color:#21759b;
+display: inline-block;
+width: 220px;
+word-wrap: break-word;	
+}
+.text-gray-small{
+font-size: 12px;
+color:#CCC;
+display: inline-block;
+width: 220px;
+word-wrap: break-word;	
+}
+.text-darker-small{
+font-size: 12px;
+color:#666;
+display: inline-block;
+width: 220px;
+word-wrap: break-word;	
+}
+.text-blue-12px{
+font-weight: bold;
+font-size: 12px;
+color:#21759b;	
+}	
+.text-gray{
+font-weight: bold;
+font-size: 12px;
+color:#777777;	
+}	
+.approve{
+	color:#060;
+	
+	}
+.unapprove{
+	color:#F00;
+	
+	}
+.unapprove-light{
+	color:#C60;
+	
+	}	
+.quickedit{
+	color:#21759b;
+	
+	}
+.edit{
+	color:#21759b;
+	
+	}
+.spam{
+	color:#900;
+	
+	}
+.trash{
+	color:#F00;
+	
+	}		
+
+
+
+
+/* RAKSTI */	
+	
+	
+.hidden {
+	display:none
+}
+
+
+
+#col-container,#col-left,#col-right {
+	overflow:hidden;
+	padding:0;
+	margin:0
+}
+#col-left {
+	width:35%
+}
+#col-right {
+	float:right;
+	clear:right;
+	width:65%
+}
+.col-wrap {
+	padding:0 7px
+}
+.alignleft {
+	float:left;
+}
+.alignright {
+	float:right;
+}
+.textleft {
+	text-align:left
+}
+.textright {
+	text-align:right
+}
+.clear {
+	clear:both
+}
+
+
+
+section.block > div:first-child > * {
+float: none!important;
+}
+.subsubsub {
+	position: relative;
+	top:75px;
+	width:60px;
+	list-style:none;
+	margin:8px 0 5px;
+	padding:0;
+	white-space:nowrap;
+	font-size:12px;
+	float:left
+}
+.subsubsub a {
+	line-height:2;
+	padding:.2em;
+	text-decoration:none
+}
+.subsubsub a .count,.subsubsub a.current .count {
+	color:#999;
+	font-weight:normal
+}
+.subsubsub a.current {
+	font-weight:bold;
+	background:0;
+	border:0
+}
+.subsubsub li {
+	display:inline;
+	margin:0;
+	padding:0
+}
+
+.wrap {
+	margin:4px 15px 0 0
+}
+
+
+
+
+
+
+
+.widefat {
+	width: 100%;
+ 	position: relative;
+	top: 19px;
+}
+.widefat thead {
+	font-weight:bold;
+	
+	border-bottom: solid 1px;
+}
+.widefat tbody tr {
+	border-bottom: dashed 1px #999999;
+	
+}
+.widefat td  {
+	padding-left: 8px;
+	
+	
+}
+.widefat th {
+	text-align:left;
+	padding: 3px 0px 0px 8px;
+
+}
+.widefat p {
+	width: 368px;
+	text-align: left;
+
+}
+
+ #the-comment-list tr:hover {
+	background-color:#f3f3f3;
+}
+
+.wrap h1, h2  {
+	font-size: 18px;
+	font-weight: bold;
+	color: #008cca;
+	
+}
+.comments_ball  {
+	font-size: 18px;
+	font-weight: bold;
+	color: #008cca;
+	
+}
+.published {
+	color:#0C0;
+	
+	
+	}
+
+
+
+
+.tablenav a.button-secondary {
+	display:block;
+	margin:3px 8px 0 0
+}
+.tablenav {
+	clear:both;
+	height:30px;
+	margin:15px 0 4px;
+	vertical-align:middle
+}
+.tablenav.themes {
+	max-width:98%
+}
+.tablenav .tablenav-pages {
+	float:right;
+	display:block;
+	cursor:default;
+	height:30px;
+	line-height:25px;
+	font-size:12px
+	width:400px;
+}
+
+.filter {
+	float:left;
+	margin:-5px 0 0 10px
+}
+.filter .subsubsub {
+	margin-left:-10px;
+	margin-top:13px
+}
+.screen-per-page {
+	width:4em
+}
+#posts-filter fieldset {
+	float:left;
+	margin:0 1.5ex 1em 0;
+	padding:0
+}
+#posts-filter fieldset legend {
+	padding:0 0 .2em 1px
+}
+span.post-state-format {
+	font-weight:normal
+}
+
+
+
+
+
+ul.cat-checklist {
+	height:12em;
+	border-style:solid;
+	border-width:1px;
+	overflow-y:scroll;
+	padding:0 5px;
+	margin:0
+}
+#bulk-titles {
+	display:block;
+	height:12em;
+	border-style:solid;
+	border-width:1px;
+	overflow-y:scroll;
+	padding:0 5px;
+	margin:0 0 5px
+}
+.inline-edit-row fieldset ul.cat-checklist li,.inline-edit-row fieldset ul.cat-checklist input {
+	margin:0
+}
+.inline-edit-row fieldset ul.cat-checklist label,.inline-edit-row .catshow,.inline-edit-row .cathide,.inline-edit-row #bulk-titles div {
+	font-family:sans-serif;
+	font-style:normal;
+	font-size:11px
+}
+table .inline-edit-row fieldset ul.cat-hover {
+	height:auto;
+	max-height:30em;
+	overflow-y:auto;
+	position:absolute
+}
+.inline-edit-row fieldset label input.inline-edit-menu-order-input {
+	width:3em
+}
+.inline-edit-row fieldset label input.inline-edit-slug-input {
+	width:75%
+}
+.quick-edit-row-post fieldset label.inline-edit-status {
+	float:left
+}
+
+
+#excerpt,.attachmentlinks {
+	margin:0;
+	height:4em;
+	width:98%
+}
+#template div {
+	margin-right:190px
+}
+p.pagenav {
+	margin:0;
+	display:inline
+}
+.pagenav span {
+	font-weight:bold;
+	margin:0 6px
+}
+.row-title {
+	font-size:13px!important;
+	font-weight:bold
+}
+.column-author img,.column-username img {
+	float:left;
+	margin-right:10px;
+	margin-top:1px
+}
+.row-actions {
+	visibility:hidden;
+	padding:2px 0 0
+}
+tr:hover .row-actions,div.comment-item:hover .row-actions {
+	visibility:visible
+}
+.row-actions-visible {
+	padding:2px 0 0
+}
+.form-table .pre {
+	padding:8px;
+	margin:0
+}
+table.form-table td .updated {
+	font-size:13px
+}
+.plugin-install #description,.plugin-install-network #description {
+	width:60%
+}
+table .vers,table .column-visible,table .column-rating {
+	text-align:left
+}
+.error-message {
+	color:red;
+	font-weight:bold
+}
+

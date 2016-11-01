@@ -1,0 +1,36 @@
+.file_queued {
+	width: 350px;
+	height: 40px;
+	border: 1px solid #999;
+	background-color: #eee;
+}
+.file_queued .filename { padding-left: 10px; width: 270px; overflow: hidden; height: 20px; line-height: 20px; display: inline-block; }
+.file_queued .filesize { float: right; padding-right: 10px; }
+
+.file_queued .progress-container {
+	border: 1px solid #999;
+	width: 337px;
+	margin: 0 5px;
+	display: inline-block;
+	height: 6px;
+	position: relative;
+	padding: 1px;
+}
+.file_queued .progress {
+	display: inline-block;
+	width: 0px;
+	height: 6px;
+	background-color: #888;
+	position: absolute;
+}
+
+
+#pic-list .image {
+	display: inline-block;
+	width: 110px;
+	vertical-align: top;
+}
+#pic-list .image label {
+	display: inline;
+	padding: 0;
+}

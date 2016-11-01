@@ -1,0 +1,26 @@
+ul.tree .controls a {
+	padding: 2px 10px 1px;
+	display: inline-block;
+	margin: 0px 2px;
+	vertical-align: top;
+	height: 20px;
+	line-height: 20px;
+}
+
+ul.tree .controls a.settings span {
+	background: url('img/icons-dropdowns.png') 0 0 no-repeat;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+}
+
+	ul.tree li > .controls { visibility: hidden; float: right; }
+	ul.tree li:hover > .controls { visibility: visible; }
+	ul.tree li:before { margin-top: 11px; }
+	ul.tree p { padding: 0 0 0 16px; margin: 0; }
+	ul.tree { margin: 0; }
+	ul.tree p + a + a { margin-top: -20px; }
+	ul.tree li:hover > p:after { height: 24px; margin-top: -21px; }
+	ul.tree:before { top: -8px; bottom: 8px; }
+	ul.tree li:hover > p > a:only-child { border-right: 0; }
+

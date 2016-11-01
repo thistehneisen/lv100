@@ -1,0 +1,15 @@
+RewriteEngine on
+
+RewriteCond %{DOCUMENT_ROOT} !-f
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule . index.php [QSA]
+
+
+<FilesMatch "\.(js|ttf|svg|eotwoff)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>

@@ -1,0 +1,27 @@
+nav.pagger a { margin-right: 0px; min-width: 20px; text-align: center; }
+nav.pagger a {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+nav.pagger { margin: 10px 0; }
+nav.pagger a:not(:last-of-type) { border-right-width: 0px; }
+nav.pagger a.green { border-right-width: 1px; }
+nav.pagger a.green + a { border-left-width: 0px; }
+nav.pagger a:first-child {
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+nav.pagger a:last-of-type {
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+nav.pagger form { display: inline; }
