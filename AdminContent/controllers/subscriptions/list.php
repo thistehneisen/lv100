@@ -23,8 +23,6 @@
 		if ($_POST["email"]) {
 			DataBase()->insert("emails", array(
 				"email"    => $_POST["email"],
-				"news"    => $_POST["news"] == "1" ? 1 : 0,
-				"actualities"    => $_POST["actualities"] == "1" ? 1 : 0,
 				"language" => $language
 			), true);
 			Page()->addCmsInfotip("Jauns abonaments ir pievienots.","success");
@@ -51,7 +49,7 @@
 		<div>
 
 			<!-- Nav tabs -->
-			<ul class="nav nav-tabs" role="tablist">
+			<?php /*<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation"<?php if ($language == "lv") { ?> class="active"<?php } ?>>
 					<a href="<?php print(Page()->getURL(array("l" => "lv"))); ?>" role="tab"><?php print(Page()->language_labels["lv"]); ?></a>
 				</li>
@@ -61,7 +59,7 @@
 				<li role="presentation"<?php if ($language == "en") { ?> class="active"<?php } ?>>
 					<a href="<?php print(Page()->getURL(array("l" => "en"))); ?>" role="tab"><?php print(Page()->language_labels["en"]); ?></a>
 				</li>
-			</ul>
+			</ul>*/ ?>
 			<div class="tab-content">
 				<?php
 					DataBase()->countResults = true;
@@ -78,14 +76,7 @@
 									<div class="col-xs-5">
 										<input type="email" class="form-control" name="email" placeholder="Ieraksti abonenta e-pasta adresi">
 									</div>
-									<div class="form-horizontal col-xs-2">
-										<input style="margin-right: 1em;" type="checkbox" name="news" id="news" value="1">
-										<label for="news" class="control-label">jaun.</label>
-									</div>
-									<div class="form-horizontal col-xs-2">
-										<input style="margin-right: 1em;" type="checkbox" name="actialities" id="actialities" value="1">
-										<label for="actialities" class="control-label">aktual.</label>
-									</div>
+
 									<div class="col-xs-3">
 										<button type="submit" class="btn btn-default btn-block">Pievienot abonamentu</button>
 									</div>
@@ -97,9 +88,6 @@
 									<tr>
 										<th>E-pasta adrese</th>
 										<th width="175">Pierakstīšanās laiks</th>
-										<th width="75">Jaun.</th>
-										<th width="75">Aktual.</th>
-										<th width="40">Izsūtīti</th>
 										<th width="1"></th>
 									</tr>
 								</thead>
@@ -108,9 +96,6 @@
 										<tr>
 											<td><?php print($email["email"]); ?></td>
 											<td><?php echo $Com->getdate("1", strtotime($email["time"]), "lv-short") ?>, <?php echo date("H:i", strtotime($email["time"])) ?></td>
-											<td><?php print($email["news"] ? 'x' : ''); ?></td>
-											<td><?php print($email["actualities"] ? 'x' : ''); ?></td>
-											<td><?php print($email["sent"]); ?></td>
 											<td class="actions">
 												<?php if (ActiveUser()->can(Page()->controller,"abonentu dzēšana")) { ?>
 												<a href="<?php print(Page()->aHost . Page()->controller); ?>/?delete=<?php print($email["id"]); ?>" class="btn btn-default btn-xs" data-confirm="Tiešām vēlies dzēst šo e-pasta adresi no datubāzes?">Dzēst</a><?php } ?>

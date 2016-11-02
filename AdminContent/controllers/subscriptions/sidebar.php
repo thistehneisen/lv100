@@ -4,14 +4,11 @@
 		<li>
 			<a class="<?php print(Page()->action == "list" ? 'active' : ''); ?>" href="<?php echo Page()->adminHost ?><?php echo Page()->controller ?>/list/"><span class="glyphicon glyphicon-list"></span> Abonementi</a>
 		</li>
-		<li>
+		<?php /*<li>
 			<a class="<?php print(Page()->action == "manual" ? 'active' : ''); ?>" href="<?php echo Page()->adminHost ?><?php echo Page()->controller ?>/manual/"><span class="glyphicon glyphicon-send"></span> Manuāla izsūtīšana</a>
 		</li>
 		<li>
 			<a class="<?php print(Page()->action == "settings" ? 'active' : ''); ?>" href="<?php echo Page()->adminHost ?><?php echo Page()->controller ?>/settings/"><span class="glyphicon glyphicon-cog"></span> Uzstādījumi</a>
-		</li>
-		<!--		<li>-->
-<!--			<a class="" href="--><?php //echo Page()->adminHost ?><!----><?php //echo Page()->controller ?><!--/manual/">Manuāla izsūtīšana</a>-->
-<!--		</li>-->
+		</li>*/ ?>
 	</ul>
 </nav>
