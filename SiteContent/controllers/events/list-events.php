@@ -7,7 +7,7 @@
 
 <div class="container calendar-month">
 	<h1 class="calendar-switch">
-		<span><?php print(Node()->id); ?></span>
+		<span><?php print(Node()->title); ?></span>
 		<div class="switches">
 			<a class="<?php print($type == "calendar" ? "active" : ""); ?>" href="<?php print(Page()->getURL(array("t"=>"calendar"))); ?>">
 				<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-calendar1.svg'); ?></div>
