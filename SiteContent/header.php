@@ -53,11 +53,11 @@
 		<title>Latvija 100</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="stylesheet" type="text/css" href="<?php print(Page()->bHost); ?>assets/css/1st-phase.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php print(Page()->bHost); ?>assets/css/1st-phase.css?_=<?php print(filemtime(Page()->bPath."assets/css/1st-phase.css")); ?>"/>
 
 		<script src="<?php print(Page()->bHost); ?>assets/js/jquery-2.1.4.min.js" type="text/javascript"></script>
 		<script type='application/javascript' src="<?php print(Page()->bHost); ?>assets/js/fastclick.js"></script>
-		<script src="<?php print(Page()->bHost); ?>assets/js/scripts.js" type="text/javascript"></script>
+		<script src="<?php print(Page()->bHost); ?>assets/js/scripts.js?_=<?php print(filemtime(Page()->bPath."assets/js/scripts.js")); ?>" type="text/javascript"></script>
 		<link rel="icon" type="image/png" href="<?php print(Page()->bHost); ?>assets/img/favicon.png"/>
 
 	</head>

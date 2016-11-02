@@ -123,9 +123,9 @@ body {
 @gray-2: #afb0b1;
 @gray-3: #edeef0;
 
-@red-0: #a22937;
-@red-1: #d02934;
-@red-2: #ff2930;
+@red-0: #d02934;
+@red-1: #ff2930;
+@red-2: #a22937;
 
 // UI COLORS
 @red: #f95251;
@@ -307,7 +307,7 @@ section {
 // - - - - - - - - - - -  HEADER  - - - - - - - - - - - 
 
 header.header {
-	background: #FFF;
+	//background: #FFF;
 	padding-top: 0em;
 	padding-bottom: 0em;
 	margin-bottom: 3rem;
@@ -375,7 +375,7 @@ header.header {
 			padding-right: 1em;
 			padding-left: 1em;
 			letter-spacing: 0.08em;
-			color: @black-2;
+			color: @black-3;
 			position: relative;
 			padding-bottom: 0.35em;
 			&:after {
@@ -394,7 +394,7 @@ header.header {
 				will-change: opacity, transform;
 			}
 			&:hover, &:active {
-				color: @black-1;
+				color: @black-3;
 				text-decoration: none;
 				&:after {
 					transform: scaleX(1);
@@ -413,7 +413,7 @@ footer {
 	background: lighten(@gray-3, 4%);
 	padding-top: 3em;
 	padding-bottom: 3em;
-	margin-top: 6rem;
+	margin-top: 12rem;
 	border-top: solid 0.4rem @gray-3;
 
 	.container {
@@ -595,37 +595,137 @@ a {
 
 }
 
+
+// - - - - - - - - - - -  MORE LINK  - - - - - - - - - - - 
+.more {
+	border-top: 0.4rem solid @black-3;
+	display: block;
+	width: 100%;
+	clear: both;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+	font-size: 1em;
+	&:after {
+		.clearfix();
+	}
+	a {
+		display: inline-block !important;
+		float: right;
+		border: .4rem solid @black-3 !important;
+		color: @black-3;
+		font-weight: 900;
+		font-size: 1.8em !important;
+		line-height: 2em !important;
+		padding-left: 2em;
+		padding-right: 3.25em;
+		margin-right: 1.5rem;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+		position: relative;
+		background: #FFF;
+		left: 0;
+		margin: 0;
+		width: auto;
+		top: -0.4rem;
+		background: #FFF;
+		&:hover {
+			color: @black-3 !important;
+			text-decoration: none;
+			svg {
+				transform: translateX(0.25em);
+			}
+		}
+		svg {
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			position: absolute;
+			right: 1.5em;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			transform: translateX(0);
+			transition: all 0.2s ease;
+			path {
+				fill: @black-3;
+			}
+		}
+	}
+}
+
+
 // - - - - - - - - - - -  SHARE  - - - - - - - - - - - 
 .social-share {
-	font-size: 1.1em;
-	padding-top: 2em;
-	padding-bottom: 2em;
+	padding-top: 3em;
+	padding-bottom: 6em;
 	p {
 		color: @gray-2;
 		display: inline-block;
 		margin-right: 1em;
+		font-size: 1.25em;
+		background: #FFF;
+
 	}
 	a {
 		display: inline-block;
 		background: @gray-3;
-		padding-left: 1.25em;
-		padding-right: 1.25em;
-		border-radius: 0.5em;
+		padding-left: 2.5em;
+		padding-right: 1.15em;
+		padding-top: 0.15em;
+		border-radius: 0.25em;
 		margin-left: 0.25em;
 		margin-right: 0.25em;
-		border-color: fade(@black-1, 20%) !important;
+		border-bottom: solid 0.15rem fade(@black-1, 20%) !important;
 		color: #FFF !important;
 		font-weight: 500;
-
+		line-height: 1.75em;
+		color: #FFF;
+		font-size: 1em;
+		position: relative;
+		transition: all 0.1s ease;
+		&:hover {
+			text-decoration: none;
+		}
+		svg {
+			display: inline-block;
+			width: 1.3em;
+			height: 1.2em;
+			position: absolute;
+			left: 0.75em;
+			bottom: 0;
+			top: 0;
+			margin: auto;
+			path {
+				fill: #FFF;
+			}
+		}
 	}
 	.tweet {
 		background: #14aabf;
+		&:hover {
+			background: saturate(lighten(#14aabf, 5%), 10%);
+		}
+		&:active {
+			background: darken(#14aabf, 2%);
+		}
 	}
 	.share {
 		background: #4c6ef5;
+		&:hover {
+			background: saturate(lighten(#4c6ef5, 5%), 10%);
+		}
+		&:active {
+			background: darken(#4c6ef5, 2%);
+		}
 	}
 	.mail {
 		background: #3fbf57;
+		&:hover {
+			background: saturate(lighten(#3fbf57, 5%), 10%);
+		}
+		&:active {
+			background: darken(#3fbf57, 2%);
+		}
 	}
 }
 
@@ -1225,7 +1325,6 @@ audio::-webkit-media-controls-panel {
 .sidebar {
 	.side-block {
 		padding: 1.5rem;
-		background: #fff;
 	}
 }
 
@@ -1239,17 +1338,31 @@ audio::-webkit-media-controls-panel {
 		padding-bottom: 0.75rem;
 		line-height: 1em;
 		letter-spacing: 0.04em;
+		a {
+			font-size: 1em;
+			line-height: 1em;
+			margin: 0;
+			padding: 0;
+			position: relative;
+
+			&:hover, &:active {
+				color: @black-3;
+				text-decoration: none;
+			}
+		}
 	}
 }
 .tagcloud {
 	a {
-		font-size: 1.8rem;
+		font-size: 1.6rem;
 		color: @gray-1;
 		margin-right: 0.5em;
 		line-height: 1.8em;
 		white-space: nowrap;
 		text-decoration: none;
 		position: relative;
+		background: #fff;
+
 		&:after {
 			content: '';
 			display: block;
@@ -1267,7 +1380,7 @@ audio::-webkit-media-controls-panel {
 			z-index: 0;
 		}
 		&:hover, &:active {
-			color: @black-1;
+			color: @black-3;
 			text-decoration: none;
 			&:after {
 				transform: scaleX(1);
@@ -1294,6 +1407,8 @@ audio::-webkit-media-controls-panel {
 		display: block;
 		border-bottom: 1px solid @gray-3;
 		transition: all 0.2s ease;
+		background: #fff;
+
 		&:hover {
 			color: @red-2;
 			text-decoration: none;
@@ -1306,6 +1421,8 @@ audio::-webkit-media-controls-panel {
 			font-size: 1.4rem;
 			color: @gray-1;
 			margin-bottom: 0.5rem;
+			background: #fff;
+
 		}
 	}
 }
@@ -1327,7 +1444,7 @@ audio::-webkit-media-controls-panel {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 100000;
+	z-index: 200000;
 	-webkit-overflow-scrolling: touch;
 	outline: 0;
 	font-size: 1em;
@@ -1459,13 +1576,13 @@ audio::-webkit-media-controls-panel {
 	//background: #FFF;
 	.supporters {
 		background: #FFF !important;
-		padding-top: 3rem;
+		padding-top: 0rem;
 		&:after {
 			.clearfix();
 		}
 	}
 	.sidebar {
-		margin-top: 2.75rem;
+		margin-top: 0.75rem;
 	}
 	padding: 0;
 	.content {
@@ -1611,7 +1728,7 @@ audio::-webkit-media-controls-panel {
 			will-change: opacity, transform;
 		}
 		&:hover, &:active {
-			color: @black-1;
+			color: @black-3;
 			text-decoration: none;
 			&:after {
 				transform: scaleX(1);
@@ -1687,7 +1804,6 @@ audio::-webkit-media-controls-panel {
 		.clearfix();
 	}
 	padding-bottom: 6rem !important;
-
 	.side-block {
 		padding-left: 3rem;
 	}
@@ -1697,7 +1813,6 @@ audio::-webkit-media-controls-panel {
 		margin: 0 auto;
 		height: auto;
 	}
-
 	.header {
 		height: 3rem;
 		width: 100%;
@@ -1717,7 +1832,6 @@ audio::-webkit-media-controls-panel {
 			line-height: 3rem;
 			display: inline-block;
 			background: #FFF;
-
 		}
 		.left, .right {
 			position: absolute;
@@ -1750,7 +1864,6 @@ audio::-webkit-media-controls-panel {
 		.left {
 			left: 0;
 		}
-
 		.right {
 			right: 0;
 		}
@@ -1845,12 +1958,12 @@ audio::-webkit-media-controls-panel {
 			bottom: -3px;
 			left: 0;
 			right: 0;
+			opacity: 0;
 			margin: auto;
 			border-left: 13px solid transparent;
 			border-right: 13px solid transparent;
 			border-bottom: 13px solid @black-3;
-			opacity: 0;
-			transform: scaleY(1) translateY(3rem);
+			transform: translateY(4rem) scaleY(0);
 			transform-origin: center center;
 			transition: all 0s ease, transform 0.5s ease;
 
@@ -1877,8 +1990,15 @@ audio::-webkit-media-controls-panel {
 		}
 		&:before, &:after {
 			opacity: 1;
-			transition: all 0s ease, transform 0.5s ease;
-			transform: scaleY(1) translateY(0);
+			transform: translateY(0) scaleY(1);
+		}
+		&:before {
+			transition: all 0.3s ease;
+
+		}
+		&:after {
+			transition: all 0.3s ease, opacity 0s ease;
+
 		}
 	}
 	.day.other {
@@ -1954,6 +2074,8 @@ audio::-webkit-media-controls-panel {
 			backface-visibility: hidden;
 			box-shadow: inset 0 0 0 0.3rem @black-3;
 			backface-visibility: hidden;
+			padding: 1rem 0;
+
 			&:nth-child(2) {
 				left: 14.2857%;
 			}
@@ -2040,7 +2162,7 @@ audio::-webkit-media-controls-panel {
 
 				}
 				&:hover, &:active {
-					color: @black-1;
+					color: @black-3;
 					text-decoration: none;
 					&:after {
 						transform: scaleX(1);
@@ -2069,8 +2191,7 @@ audio::-webkit-media-controls-panel {
 			display: block;
 			overflow: visible;
 			transform: translateY(0);
-			transition: all 0.3s ease, padding 0s linear, transform 0.5s ease;
-			padding: 1rem 0;
+			transition: all 0.3s ease, padding 0 linear;
 			.close {
 				transform: translateY(0);
 				opacity: 1;
@@ -2914,6 +3035,8 @@ a.collapse-toggle {
 }
 .embed-responsive .embed-responsive-item, .embed-responsive embed, .embed-responsive iframe, .embed-responsive object, .embed-responsive video {
 	position: absolute;
+	background: #FFF;
+	backface-visibility: hidden;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -2985,6 +3108,7 @@ a.collapse-toggle {
 	transform-origin: right top;
 	transform: scaleY(0);
 	will-change: opacity, transform;
+	z-index: ;
 	&:before {
 		content: '';
 		display: block;
@@ -3033,6 +3157,15 @@ a.collapse-toggle {
 }
 .lg-1-5 {
 	width: 20%;
+}
+.lg-2-5 {
+	width: 40%;
+}
+.lg-3-5 {
+	width: 60%;
+}
+.lg-4-5 {
+	width: 80%;
 }
 .lg-1-4 {
 	width: 25%;
@@ -3083,25 +3216,28 @@ a.collapse-toggle {
 //XS
 
 @media only screen and (min-width : 320px) and  (max-width : 767px) {
+	header.header {
+		background: #FFF;
+	}
 	body {
 		margin-top: 10rem;
 	}
-.container .lg-2-3 {
-	padding-right: 0;
-}
-.container .content header h1 {
-	font-size: 3.2rem;
-}
+	.container .lg-2-3 {
+		padding-right: 0;
+	}
+	.container .content header h1 {
+		font-size: 3.2rem;
+	}
 	.item-horizontal  {
 		padding-right: 0;
-	.img-ct {
-		width: 100%;
-		padding-right: 0;
-	}
-	.text-ct {
-		width: 100%;
-		padding-left: 0;
-	}
+		.img-ct {
+			width: 100%;
+			padding-right: 0;
+		}
+		.text-ct {
+			width: 100%;
+			padding-left: 0;
+		}
 	}
 	html {
 		font-size: 8px !important;
@@ -3265,11 +3401,10 @@ a.collapse-toggle {
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 99999;
+	z-index: 999999;
 
 	.container {
 		padding-bottom: 0.5rem;
-		border-bottom: 1px solid fade(@gray-3, 40%);
 		.logo {
 			max-width: 25em;
 			padding-top: 0.75rem;
@@ -3404,6 +3539,16 @@ a.collapse-toggle {
 .xs-1-5 {
 	width: 20%;
 }
+.xs-2-5 {
+	width: 40%;
+}
+.xs-3-5 {
+	width: 60%;
+}
+.xs-4-5 {
+	width: 80%;
+}
+
 .xs-1-4 {
 	width: 25%;
 }
@@ -3457,6 +3602,9 @@ a.collapse-toggle {
 //SM
 
 @media only screen and (min-width : 768px) and (max-width : 992px) {
+		header.header {
+		background: #FFF;
+	}
 	body {
 		margin-top: 13rem;
 	}
@@ -3500,8 +3648,8 @@ a.collapse-toggle {
 	z-index: 99999;
 
 	.container {
-		padding-bottom: 1.25rem;
-		border-bottom: 1px solid fade(@gray-3, 40%);
+		padding-bottom: 1rem;
+		//border-bottom: 1px solid fade(@gray-3, 40%);
 		.logo {
 			max-width: 30em;
 			padding-top: 1rem;
@@ -3634,6 +3782,15 @@ a.collapse-toggle {
 .sm-1-5 {
 	width: 20%;
 }
+.sm-2-5 {
+	width: 40%;
+}
+.sm-3-5 {
+	width: 60%;
+}
+.sm-4-5 {
+	width: 80%;
+}
 .sm-1-4 {
 	width: 25%;
 }
@@ -3718,6 +3875,15 @@ a.collapse-toggle {
 	}
 	.md-1-5 {
 		width: 20%;
+	}
+	.md-2-5 {
+		width: 40%;
+	}
+	.md-3-5 {
+		width: 60%;
+	}
+	.md-4-5 {
+		width: 80%;
 	}
 	.md-1-4 {
 		width: 25%;

@@ -31,11 +31,8 @@
 
 	$fpage = Settings()->get("first_page_data", $parent->language);
 	$avlists = array();
-	$avlists[(string)$fpage["nb"]["node"]] = "news";
-	$avlists[(string)$fpage["ab"]["node"]] = "actualities";
-
-
-
+	$avlists[ (string)$fpage["nb"]["node"] ] = "news";
+	$avlists[ (string)$fpage["ab"]["node"] ] = "actualities";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -132,7 +129,7 @@
 		$x = Page()->setNode($settings);
 
 		if ($x) {
-			xLog("news: ".($node && $node->id ? "Labots" : "Pievienots"). " ieraksts ".$settings["title"], "success", $x);
+			xLog("news: " . ($node && $node->id ? "Labots" : "Pievienots") . " ieraksts " . $settings["title"], "success", $x);
 			FS()->registerMedia($node->cover, $x, "cover", true);
 			FS()->registerMedia($node->data->cover_original, $x, "cover_original");
 			FS()->unregisterMedia($x, "content");
@@ -142,8 +139,8 @@
 
 			if ($node->data->mail_to_subscribers && $settings["enabled"]) {
 				$node = $this->getNode($x);
-				if (in_array((string)$node->parent,array_keys($avlists))) {
-					$this->mailScheduledPost($node, $avlists[(string)$node->parent]);
+				if (in_array((string)$node->parent, array_keys($avlists))) {
+					$this->mailScheduledPost($node, $avlists[ (string)$node->parent ]);
 				}
 			}
 		}
@@ -309,7 +306,7 @@
 									"height"   => $oImg["height"],
 									"type"     => "photo"
 								)), 1); ?>" href="#" class="btn btn-xs btn-default croptool<?php if (!$oImg) { ?> hidden<?php } ?>"><img src="<?php print(Page()->bHost); ?>/css/img/icons-edit.png" info="Pielāgot attēlu"></a>
-								<img class="cover" width="100%"<?php if ($node->cover) { ?> src="<?= Page()->host . $node->cover ?>"<?php } else { ?> src="<?php print(Page()->host . Page()->getEmptyImage(400)); ?>"<?php } ?>/>
+								<img class="cover" width="100%"<?php if ($node->cover) { ?> src="<?= Page()->host . $node->cover ?>"<?php } else { ?> src="<?php print(Page()->host . Page()->getEmptyImage(Page()->thumbnails["news"]["width"], Page()->thumbnails["news"]["height"])); ?>"<?php } ?>/>
 								<input type="hidden" name="cover" value="<?= $node->cover ?>"/>
 								<input type="hidden" name="cover_original" value="<?= $node->data->cover_original ?>"/>
 								<a href="#" class="<?php if (!$node->cover) { ?>hidden<?php } ?> delete2 btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span></a>
@@ -361,14 +358,19 @@
 			$('#cover_2_1').data("opts", response.opts).prev('input').val("");
 			$('#cover_2_2').data("opts", response.opts).prev('input').val("");
 			$('.other-thumbs').removeClass("hidden");
-		}, "crop", {crop: "300x300", keep: 1});
+		}, "crop", {
+			crop: "<?php print(Page()->thumbnails["news"]["width"]); ?>x<?php print(Page()->thumbnails["news"]["height"]); ?>",
+			keep: 1
+		});
 		$("#fb-share-pic-content .croptool").on("click", function(e) {
 			e.preventDefault();
 			var imgEditor = new imgEditTool($(this).data("opts")).open(function() {
 				this.cropToolInit({
-					desiredSize: {w: 300, h: 300}, cancel: function() {
+					desiredSize: {
+						w: <?php print(Page()->thumbnails["news"]["width"]); ?>,
+						h: <?php print(Page()->thumbnails["news"]["height"]); ?>}, cancel: function() {
 						this.close();
-					}, save    : function(data) {
+					}, save: function(data) {
 						that = this;
 						$.getJSON(<?php Page()->e(Page()->host . "media.upload/?raw_crop=1", 3)?>+'&session=' + Settings.session_id, {
 							i: data.i,
@@ -377,7 +379,9 @@
 							w: data.w,
 							h: data.h,
 							r: data.r,
-							m: {w: 300, h: 300}
+							m: {
+								w: <?php print(Page()->thumbnails["news"]["width"]); ?>,
+								h: <?php print(Page()->thumbnails["news"]["height"]); ?>}
 						}, function(response) {
 							that.close();
 							$("#fb-share-pic-content img.cover").attr({src: Settings.Host + response.fileThumb});
@@ -391,7 +395,7 @@
 		$("#fb-share-pic-content a.delete2").on("click", function(e) {
 			e.preventDefault();
 			$("#fb-share-pic-content img")
-				.attr("src", <?php Page()->e(Page()->host . Page()->getEmptyImage(400), 3); ?>);
+				.attr("src", <?php Page()->e(Page()->host . Page()->getEmptyImage(Page()->thumbnails["news"]["width"], Page()->thumbnails["news"]["height"]), 3); ?>);
 			$("#fb-share-pic-content a.delete2").addClass("hidden");
 			$("#fb-share-pic-content a.croptool").addClass("hidden");
 			$("#fb-share-pic-content input").val("");

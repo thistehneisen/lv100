@@ -17,6 +17,7 @@ var symbolFuncs = ["drawZalktis", "drawOrnament1", "drawJumis"];
 var canvas = document.getElementById('projector');
 var context = canvas.getContext('2d');
 
+
 if (window.devicePixelRatio > 1) {
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;
@@ -34,9 +35,6 @@ if (window.devicePixelRatio > 1) {
 
 var xcoo;
 var ycoo;
-
-var checkCountIntervar;
-var zimetBackground;
 
 var checkRound = 0;
 

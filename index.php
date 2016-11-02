@@ -31,6 +31,13 @@
 		"defaultImageBox" => array(1170, 5000),
 		"maxImageQuality" => 90,
 
+		"thumbnails" => array(
+			"news" => array("width" => 550, "height" => 344)
+		),
+		"pager" => array(
+			"news" => 6
+		),
+
 		"remoteAdminPanel" => false,
 
 		"GoogleReCAPTCHA" => array(
@@ -62,8 +69,8 @@
 			"endpoint" => "http://api.draugiem.lv/json/"
 		),
 
-		"development" => true,
-		"trustProxyHeaders" => false,
+		"development"        => true,
+		"trustProxyHeaders"  => false,
 		"newsLettersEnabled" => false,
 		"email_from_address" => "info@lnkc.gov.lv",
 

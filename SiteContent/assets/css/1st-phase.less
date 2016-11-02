@@ -6,7 +6,11 @@ body {
 }
 // start page
 section {
-	margin-bottom: 8rem;
+	padding-bottom: 3rem;
+	padding-top: 3rem;
+	&:after {
+		.clearfix();
+	}
 	.container {
 		//background: #FFF;
 
@@ -55,14 +59,15 @@ section {
 		margin: 0;
 	}
 	.video {
-		margin: 2rem auto;
+		margin: 2rem 0;
 		display: block;
+		padding-right: 1rem;
 		.img-ct {
 			overflow: hidden;
 			display: block;
 			position: relative;
 			height: 0;
-			padding-bottom: 40%;
+			padding-bottom: 48.25%;
 			img {
 				.abscenter();
 			}
@@ -72,13 +77,17 @@ section {
 			}
 		}
 	}
+	.desc {
+		margin-top: 3rem;
+		padding-left: 2rem;
+	}
 	.status {
 		h3 {
 			margin: 0;
 			padding: 0;
-			font-size: 3.9em;
+			font-size: 3.4em;
 			font-weight: 500;
-			line-height: 1em;
+			line-height: 1.25em;
 			margin-bottom: 1rem;
 			background: #FFF;
 
@@ -88,19 +97,20 @@ section {
 			color: @black-3;
 			margin-bottom: 1.75rem;
 			background: #FFF;
+			clear: both;
 			b {
 				font-weight: 900;
 			}
 		}
 		a.cta {
-			display: block;
+			display: inline-block;
 			border: 0.4rem solid @black-3;
 			color: @black-3;
 			font-weight: 900;
-			font-size: 2em;
+			font-size: 1.8em;
 			line-height: 2em;
-			padding-left: 1em;
-			padding-right: 2em;
+			padding-left: 1.5em;
+			padding-right: 2.25em;
 			margin-right: 1.5rem;
 			position: relative;
 			background: #FFF;
@@ -114,13 +124,9 @@ section {
 				margin: auto;
 				width: 0;
 				height: 0;
-
 				border-top: 0.3em solid transparent;
 				border-bottom: 0.3em solid transparent;
-
 				border-left: 0.3em solid @black-3;
-
-
 			}
 			&:hover {
 				text-decoration: none;
@@ -140,9 +146,8 @@ section {
 		.cta-invite {
 			margin-right: 0 !important;
 		}
-	}
-	.guests {
-		padding-left: 3rem;
+		.guests {
+		padding-left: 0rem;
 		.profile-thumbs {
 			margin-left: -0.5rem;
 			margin-right: -0.5rem;
@@ -157,15 +162,14 @@ section {
 			text-align: left;
 			text-transform: uppercase;
 			display: block;
+			margin-bottom: 1.5rem;
 			> div {
 				display: inline-block;
 				float: left;
 				position: relative;
-				padding: 0 0 0 3em;
+				padding: 0 0 0 1.5em;
 				line-height: 1em;
 				background: #FFF;
-
-
 				&:before {
 					content: '';
 					display: block;
@@ -188,7 +192,7 @@ section {
 				span {
 					display: block;
 					font-weight: 500;
-					font-size: 2.5em;
+					font-size: 2.25em;
 					line-height: 1em;
 					margin-bottom: 0.25rem;
 					background: #FFF;
@@ -197,6 +201,8 @@ section {
 			}
 		}
 	}
+	}
+	
 }
 
 
@@ -339,6 +345,10 @@ section {
 				}
 			}
 		}
+		.desc {
+			padding-left: 0;
+			margin-top: 0;
+		}
 		.status {
 			margin-bottom: 1.5rem;
 			a.cta {
@@ -350,12 +360,12 @@ section {
 			}
 			.going {
 				font-size: 1.4em;
-				margin-bottom: 1.25rem;
+				margin-bottom: 1.5rem;
 			}
 		}
 		.guests {
 			padding-left: 0;
-			margin-bottom: 2em;
+			margin-bottom: 0rem;
 			.counters {
 				text-align: left;
 				>div {
