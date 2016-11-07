@@ -191,7 +191,7 @@
 				<textarea id="description" class="form-control" name="description" maxlength="360"><?= htmlspecialchars($node->description) ?></textarea>
 			</div>
 		</section>
-		<section id="files-section">
+		<?php /*<section id="files-section">
 			<h1>Pievienotie faili</h1>
 			<div class="file-items">
 				<label class="control-label">Faili:</label>
@@ -219,7 +219,7 @@
 				<?php } ?><?php } ?>
 			</div>
 			<a href="#" class="addbutton" id="file-add">Pievienot failu / saiti</a>
-		</section>
+		</section>*/ ?>
 	</div>
 	<div class="col-sidebar">
 		<aside class="rightbar tabsontop">
@@ -253,12 +253,12 @@
 								<input type="checkbox" class="selector" <?= ($node && $node->data->published ? "checked" : "") ?> id="published" name="published" value="1">
 							</span>
 						</div>
-						<div class="form-group form-horizontal">
+						<?php /*<div class="form-group form-horizontal">
 							<label class="control-label" for="comments">Atļaut komentārus:</label>
 							<span class="pull-right">
 								<input type="checkbox" class="selector" <?= ($node && $node->data->comments ? "checked" : "") ?> id="comments" name="comments" value="1">
 							</span>
-						</div>
+						</div>*/ ?>
 						<?php if (in_array($parent->id, array_keys($avlists)) && (!$node || !$node->data->mail_to_queued)) { ?>
 							<div class="form-group form-horizontal">
 								<label for="mail_to_subscribers" class="control-label">Izsūtīt jaunumu:</label>

@@ -11,7 +11,7 @@
 	if (Page()->structIdCheck()) {
 		if (!Page()->perPage) Page()->perPage = 20;
 
-		if ($parent->subid == "all-events") {
+		/*if ($parent->subid == "all-events") {
 
 			$childs = Page()->getNode(array(
 				"filter"       => array(
@@ -22,9 +22,9 @@
 				"order"        => array("sort" => "ASC"),
 				"returnFields" => "id,title,fullAddress,subid"
 			));
-		} else {
+		} else {*/
 			$childs = array($parent);
-		}
+		/*}*/
 
 		$nodes = Page()->getNode(array(
 			"filter"       => array(

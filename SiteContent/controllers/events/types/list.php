@@ -1,4 +1,4 @@
-<div class="filter">
+<?php /*<div class="filter">
 	<a href="#">Izstādes</a>
 	<a href="#">Koncerti</a>
 	<a href="#">Lekcijas</a>
@@ -7,7 +7,7 @@
 	<a href="#">Performances</a>
 	<a href="#">Diskusijas</a>
 	<a href="#">Bērniem</a>
-</div>
+</div>*/ ?>
 
 
 <h3>Aprīlis 2017</h3>

@@ -1,3 +1,21 @@
+<?php
+	$filter = array(
+		"controller" => "events",
+		"view"       => "entry",
+		"enabled"    => 1,
+		"deleted"    => 0,
+		"<SQL>"      => "(DATE(`start`)<=NOW() AND DATE(`end`)>=NOW()) OR DATE(`start`)>NOW()"
+	);
+
+	$nodes = Page()->getNode(array(
+		"filter"       => $filter,
+		"order"        => array("start" => "ASC"),
+		"returnFields" => "id,title,fullAddress,start,end,category,cover",
+		"limit"        => array("page" => 0, "perPage" => 9),
+		"debug"        => false
+	));
+
+?>
 <section>
 	<div class="container">
 		<header>
@@ -5,64 +23,27 @@
 		</header>
 		<article class="masonry">
 
-			<a class="item item-vertical" href="event.php">
-				<div class="img-ct"><img src="<?php print($this->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-				<div class="text-ct">
-					<span class="date"><b>11.</b> novembris</span>
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item play item-vertical" href="event.php">
-				<div class="img-ct"><img src="<?php print($this->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-				<div class="text-ct">
-					<span class="date"><b>12.</b> novembris</span>
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item item-vertical" href="event.php">
-				<div class="img-ct"><img src="<?php print($this->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-				<div class="text-ct">
-					<span class="date"><b>13.</b> novembris</span>
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item item-vertical" href="event.php">
-				<div class="img-ct"><img src="<?php print($this->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-				<div class="text-ct">
-					<span class="date"><b>14.</b> novembris</span>
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item item-vertical" href="event.php">
-				<div class="text-ct">
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item item-vertical" href="event.php">
-				<div class="text-ct">
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
-
-			<a class="item play item-vertical" href="event.php">
-				<div class="img-ct"><img src="<?php print($this->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-				<div class="text-ct">
-					<span class="date"><b>17.</b> novembris</span>
-					<h2> Lorem ipsum dolor sit amet</h2>
-					<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-				</div>
-			</a>
+			<?php foreach ($nodes as $node) {
+				$ns = strtotime($node->start);
+				$ne = strtotime($node->end);
+				?>
+				<a class="item item-vertical" href="<?php print($node->fullAddress); ?>">
+					<?php if ($node->cover) { ?>
+						<div class="img-ct"><img src="<?php print($this->host . $node->cover); ?>" alt="">
+						</div>
+					<?php } ?>
+					<div class="text-ct">
+						<span class="date"><b><?php print(date("j", $ns) . (date("Ym", $ns) == date("Ym", $ne) && date("j", $ns) != date("j", $ne) ? '.-' . date("j", $ne) : '')); ?>.</b> <?php print(strftime("%B", $ns)); ?>
+							<?php if (date("Ym", $ns) != date("Ym", $ne) && date("Ymj", $ns) != date("Ymj", $ne)) { ?>
+								<b> - <?php print(date("j", $ne)); ?></b> <?php print(strftime("%B", $ne)); ?><?php } ?>
+						</span>
+						<h2><?php print($node->title); ?></h2>
+						<?php if ($node->description) { ?>
+							<p><?php print($node->description); ?></p>
+						<?php } ?>
+					</div>
+				</a>
+			<?php } ?>
 
 		</article>
 

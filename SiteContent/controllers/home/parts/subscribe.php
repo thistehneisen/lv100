@@ -2,7 +2,7 @@
 	<div class="container subscribe">
 		<header>
 			<h2>Pieraksties jaunumiem</h2>
-			<p class="lead">Donec rhoncus tincidunt sapien, in semper sapien luctus et. Sed pharetra aliquet ex, a hendrerit felis eget turpis facilisis, non maximus ex cursus.</p>
+			<?php /*<p class="lead">Donec rhoncus tincidunt sapien, in semper sapien luctus et. Sed pharetra aliquet ex, a hendrerit felis eget turpis facilisis, non maximus ex cursus.</p>*/ ?>
 		</header>
 		<div class="text" id="subscribe-container">
 			<form action="<?php print(Page()->getURL()); ?>" method="post" id="subscribe-form">
@@ -21,6 +21,9 @@
 			var options = {
 				success: function(response){
 					$('#subscribe-container').replaceWith(response);
+					setTimeout(function(){
+						$("#subscribe-alert").addClass("in");
+					},50);
 				}
 			};
 			$(this).ajaxSubmit(options);

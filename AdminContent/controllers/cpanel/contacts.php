@@ -43,16 +43,6 @@
 							<?php foreach (Page()->languages as $k => $language) { ?>
 								<div role="tabpanel" class="tab-pane<?php if ($k == 0) { ?> active<?php } ?>" id="settings-<?php echo $language ?>">
 									<div class="form-group row">
-										<div class="col-xs-6">
-											<label for="phone-<?php print($language); ?>">Telefona numurs:</label>
-											<input id="phone-<?php print($language); ?>" class="form-control" type="text" name="contacts:phone[<?php print($language); ?>]" value="<?php Page()->e(Settings()->get("contacts:phone", $language), 1); ?>"/>
-										</div>
-										<div class="col-xs-6">
-											<label for="phone2-<?php print($language); ?>">Telefona nr. kasē:</label>
-											<input id="phone2-<?php print($language); ?>" class="form-control" type="text" name="contacts:phone2[<?php print($language); ?>]" value="<?php Page()->e(Settings()->get("contacts:phone2", $language), 1); ?>"/>
-										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-xs-12">
 											<label for="email-<?php print($language); ?>">E-pasta adrese:</label>
 											<input id="email-<?php print($language); ?>" class="form-control" type="text" name="contacts:email[<?php print($language); ?>]" value="<?php Page()->e(Settings()->get("contacts:email", $language), 1); ?>"/>
@@ -68,12 +58,6 @@
 										<div class="col-xs-12">
 											<label for="gmaps-<?php print($language); ?>">Google Maps links:</label>
 											<input id="gmaps-<?php print($language); ?>" class="form-control" type="text" name="contacts:gmaps[<?php print($language); ?>]" value="<?php Page()->e(Settings()->get("contacts:gmaps", $language), 1); ?>"/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<div class="col-xs-12">
-											<label for="worktime-<?php print($language); ?>">Darba laiks:</label>
-											<textarea id="worktime-<?php print($language); ?>" class="form-control" name="contacts:worktime[<?php print($language); ?>]"><?php Page()->e(Settings()->get("contacts:worktime", $language), 1); ?></textarea>
 										</div>
 									</div>
 									<div class="form-group row">

@@ -119,11 +119,10 @@
 
 		// Extra parsing
 		$extra = false;
-		foreach ((array)$_POST['extra_titles'] as $i => $title) {
-			$extra[ $i ]["title"] = $title;
+		foreach ((array)$_POST['extra_values'] as $i => $title) {
 			$extra[ $i ]["value"] = $_POST['extra_values'][ $i ];
 		}
-		$node->data->extra = json_encode($extra);
+		$node->data->extra = $extra;
 		$node->data->project = $_POST["project"];
 
 		$node->data->hideStartTime = ($_POST["hide_start_time"] == "1");
@@ -212,6 +211,10 @@
 				<label for="content">Saturs:</label>
 				<textarea id="content" class="tinymce_big" name="content"><?php Page()->e($node ? $node->content : "", 1); ?></textarea>
 			</div>
+			<div class="form-group">
+				<label for="place-name">Norises vieta:</label>
+				<input id="place-name" class="form-control" name="place_name" type="text" value="<?php print(htmlspecialchars($node->data->place->name)); ?>"/>
+			</div>
 		</section>
 		<section>
 			<h1>Norises laiks</h1>
@@ -246,7 +249,34 @@
 				</div>
 			</div>
 		</section>
-		<section id="files-section">
+		<section>
+			<h1>Piezīmes</h1>
+			<div class="alert alert-info">
+				Parādīsies izceltos blokos.
+			</div>
+			<ol id="extra-values">
+				<?php
+					$extra = $node->data->extra;
+					foreach ((array)$extra as $e) { ?>
+						<li class="form-horizontal">
+							<div class="form-group form-custom-1">
+								<div class="col-xs-12" >
+									<div class="input-group">
+										<input type="text" name="extra_values[]" class="form-control" placeholder="" value="<?php echo htmlspecialchars($e->value) ?>">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default delete remove-extra">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</li>
+					<?php } ?>
+			</ol>
+			<a href="javascript:;" id="add-extra" class="addbutton">Pievienot</a>
+		</section>
+		<?php /*<section id="files-section">
 			<h1>Pievienotie faili</h1>
 			<div class="file-items">
 				<label class="control-label">Faili:</label>
@@ -274,7 +304,7 @@
 				<?php } ?><?php } ?>
 			</div>
 			<a href="#" class="addbutton" id="file-add">Pievienot failu / saiti</a>
-		</section>
+		</section>*/ ?>
 
 	</div>
 	<div class="col-sidebar">
@@ -318,12 +348,12 @@
 								<input type="checkbox" class="selector" <?= ($node && $node->enabled ? "checked" : "") ?> id="published" name="published" value="1">
 							</span>
 						</div>
-						<div class="form-group form-horizontal">
+						<?php /*<div class="form-group form-horizontal">
 							<label class="control-label" for="comments">Atļaut komentārus:</label>
 							<span class="pull-right">
 								<input type="checkbox" class="selector" <?= ($node && $node->data->comments ? "checked" : "") ?> id="comments" name="comments" value="1">
 							</span>
-						</div>
+						</div>*/ ?>
 						<div class="form-group">
 							<label class="control-label">Pievienošanas laiks:</label>
 							<div class="clearfix row">
@@ -403,15 +433,13 @@
 	</div>
 </div>
 
+
 <div id="extra-markup" style="display: none;">
 	<li class="form-horizontal">
 		<div class="form-group form-custom-1">
-			<div class="col-xs-4" style="padding-right:0;">
-				<input type="text" name="extra_titles[]" class="form-control" placeholder="Nosaukums">
-			</div>
-			<div class="col-xs-8" style="padding-left:0;">
+			<div class="col-xs-12">
 				<div class="input-group">
-					<input type="text" name="extra_values[]" class="form-control" placeholder="Adrese">
+					<input type="text" name="extra_values[]" class="form-control" placeholder="">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default delete remove-extra">
 							<span class="glyphicon glyphicon-remove"></span>
@@ -456,12 +484,12 @@
 			$('#cover_2_1').data("opts", response.opts).prev('input').val("");
 			$('#cover_2_2').data("opts", response.opts).prev('input').val("");
 			$('.other-thumbs').removeClass("hidden");
-		}, "crop", {crop: "300x300", keep: 1});
+		}, "crop", {resize: "780x10000", keep: 1});
 		$("#fb-share-pic-content .croptool").on("click", function(e) {
 			e.preventDefault();
 			var imgEditor = new imgEditTool($(this).data("opts")).open(function() {
 				this.cropToolInit({
-					desiredSize: {w: 300, h: 300}, cancel: function() {
+					cancel: function() {
 						this.close();
 					}, save    : function(data) {
 						that = this;
@@ -471,8 +499,7 @@
 							y: data.y,
 							w: data.w,
 							h: data.h,
-							r: data.r,
-							m: {w: 300, h: 300}
+							r: data.r
 						}, function(response) {
 							that.close();
 							$("#fb-share-pic-content img.cover").attr({src: Settings.Host + response.fileThumb});

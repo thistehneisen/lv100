@@ -152,7 +152,7 @@
 				</fieldset>
 				<?php page()->trigger("static_page_append_conetnt"); ?>
 			</section>
-			<section id="files-section">
+			<?php /*<section id="files-section">
 				<h1>Pievienotie faili</h1>
 				<div class="file-items">
 					<label class="control-label">Faili:</label>
@@ -181,7 +181,7 @@
 					<?php } ?><?php } ?>
 				</div>
 				<a href="#" class="addbutton" id="file-add">Pievienot failu / saiti</a>
-			</section>
+			</section>*/ ?>
 		</div>
 
 		<div class="col-sidebar">
@@ -236,6 +236,7 @@
 			</div><!-- /btn-group -->
 		</div>
 	</div>
+
 
 	<script type="text/javascript">
 		$(function() {

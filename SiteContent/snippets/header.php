@@ -3,9 +3,9 @@
 		<a href="<?php print(Page()->root->fullAddress); ?>" class="logo"><?php include(Page()->bPath . 'assets/img/lv100-logo.svg'); ?></a>
 		<div class="mob-nav">
 			<div class="social pull-right">
-				<a target="_blank" href="#"><?php include(Page()->bPath . 'assets/img/ico/ico-facebook.svg'); ?></a>
-				<a target="_blank" href="#"><?php include(Page()->bPath . 'assets/img/ico/ico-twitter.svg'); ?></a>
-				<a target="_blank" href="#"><?php include(Page()->bPath . 'assets/img/ico/ico-instagram.svg'); ?></a>
+				<a target="_blank" href="<?php print(Settings("contacts:fb")); ?>"><?php include(Page()->bPath . 'assets/img/ico/ico-facebook.svg'); ?></a>
+				<a target="_blank" href="<?php print(Settings("contacts:tw")); ?>"><?php include(Page()->bPath . 'assets/img/ico/ico-twitter.svg'); ?></a>
+				<a target="_blank" href="<?php print(Settings("contacts:in")); ?>"><?php include(Page()->bPath . 'assets/img/ico/ico-instagram.svg'); ?></a>
 			</div>
 
 			<nav>

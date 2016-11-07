@@ -71,12 +71,12 @@
 						<h4 class="panel-title">CMS komunikācijas e-pasta adreses</h4>
 					</div>
 					<div class="panel-body">
-						<div class="form-group">
+						<?php /*<div class="form-group">
 							<label for="cms-email-comments">Jauns komentārs:</label>
 							<input id="cms-email-comments" type="text" name="cms:email:comments[unk]" class="form-control" value="<?php Page()->e(Settings()->get("cms:email:comments", ""), 1); ?>">
 							<p class="help-block">E-pasta adreses jāatdala ar komatu.</p>
 							<p class="help-block">Uz šīm e-pasta adresēm tiks noūtiīta informācija par jauniem komentāriem.</p>
-						</div>
+						</div>*/ ?>
 						<div class="form-group">
 							<label for="cms-email-bans">Bloķēta IP adrese:</label>
 							<input id="cms-email-bans" type="text" name="cms:email:bans[unk]" class="form-control" value="<?php Page()->e(Settings()->get("cms:email:bans", ""), 1); ?>">
@@ -85,7 +85,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-default">
+				<?php /*<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">Komentāru vārdu filtrs</h4>
 					</div>
@@ -96,7 +96,7 @@
 							<p class="help-block">Frāzes, kuras komentāros jāaizstāj ar simboliem (*), jānorāda atdalot tās ar komatu.</p>
 						</div>
 					</div>
-				</div>
+				</div>*/ ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<button class="btn btn-success" type="submit">{{Save}}</button>

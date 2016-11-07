@@ -8,7 +8,7 @@
 				"language" => Page()->language
 			), true);
 			?>
-			<div class="alert alert-success" role="alert">
+			<div class="alert alert-success fade" id="subscribe-alert" role="alert">
 				<div class="alert-content">
 					<strong>Ļoti labi!</strong> Tava e-pasta adrese ir saglabāta mūsu sistēmā.
 				</div>
