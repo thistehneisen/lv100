@@ -13,7 +13,7 @@ Dosies = attending_count (bildes no šiem)
 Ielūgti = maybe_count + noreply_count
 Ieinteresēti = interested_count
 */
-$event = file_get_contents("https://graph.facebook.com/808275699312698/?access_token={$access_token_data["token"]}&fields=attending_count,maybe_count,interested_count,noreply_count,attending{first_name,picture{url}}");
+$event = json_decode(file_get_contents("https://graph.facebook.com/808275699312698/?access_token={$access_token_data["token"]}&fields=attending_count,maybe_count,interested_count,noreply_count,attending{first_name,picture{url}}"));
 ?>
 <section>
 	<div class="container invite-block">
@@ -33,19 +33,17 @@ $event = file_get_contents("https://graph.facebook.com/808275699312698/?access_t
 
 				<div class="lg-1-1 xs-1-1 guests">
 					<div class="row profile-thumbs">
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
-						<span class="lg-1-8"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-square.png" alt=""></span>
+						<?php
+						$people = array_slice($event->attending->data,0,8);
+						foreach ($people as $person) {
+							echo '						<span class="lg-1-8"><img src="'.$person->picture->data->url.'" alt="'.$person->first_name.'"></span>';
+						}
+						?>
 					</div>
 					<div class="row counters">
-						<div class="lg-1-3"><span>72 366</span>dosies</div>
-						<div class="lg-1-3"><span>4 031</span>ielūgti</div>
-						<div class="lg-1-3"><span>5 842</span>ieinteresēti</div>
+						<div class="lg-1-3"><span><?php echo number_format($event->attending_count)?></span>dosies</div>
+						<div class="lg-1-3"><span><?php echo number_format($event->maybe_count + $event->noreply_count)?></span>ielūgti</div>
+						<div class="lg-1-3"><span><?php echo number_format($event->interested_count)?></span>ieinteresēti</div>
 					</div>
 				</div>
 
