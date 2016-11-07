@@ -42,10 +42,19 @@
 		exit;
 	}
 
-	$access_token = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=912881472177929&client_secret=1df53e74749385f22a361e518927b39d&grant_type=client_credentials");
+	$access_token_data = Settings()->get("invite:access_token");
+	if (!$access_token_data || $access_token_data["updated"] < time()-3600) {
+		$data = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=912881472177929&client_secret=1df53e74749385f22a361e518927b39d&grant_type=client_credentials");
+		parse_str($data, $token);
+		$access_token_data["token"] = $token["access_token"];
+		$access_token_data["updated"] = time();
+		Settings()->set("invite:access_token",$access_token_data);
+	}
+
+	$event = file_get_contents("https://graph.facebook.com/events/808275699312698/?key=value&amp;access_token={$access_token_data["token"]}");
+
 	if (isset($_GET['testing']))
-		die(print_r($access_token, true));
-	//$event = file_get_contents("https://graph.facebook.com/events/808275699312698/?key=value&amp;access_token=912881472177929|1df53e74749385f22a361e518927b39d");
+		die(print_r($event, true));
 ?>
 	<!doctype html>
 	<html lang="en">
