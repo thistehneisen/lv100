@@ -65,6 +65,15 @@
 		      version    : 'v2.8'
 		    });
 		    FB.AppEvents.logPageView();
+
+				FB.api(
+				    "/808275699312698",
+				    function (response) {
+				      if (response && !response.error) {
+								console.log(response);
+				      }
+				    }
+				);
 		  };
 
 		  (function(d, s, id){
