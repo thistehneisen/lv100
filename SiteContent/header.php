@@ -69,8 +69,9 @@
 				FB.api(
 				    "/808275699312698",
 				    function (response) {
+							console.log(response);
 				      if (response && !response.error) {
-								console.log(response);
+								// whatevs
 				      }
 				    }
 				);
