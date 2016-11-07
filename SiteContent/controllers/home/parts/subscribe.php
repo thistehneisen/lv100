@@ -8,7 +8,6 @@
 			<form action="<?php print(Page()->getURL()); ?>" method="post" id="subscribe-form">
 				<input type="hidden" name="action" value="subscribe">
 				<input type="email" id="f-1" name="email" placeholder="Ievadi savu e-pasta adresi" required="">
-				
 				<button>Pierakstīties</button>
 			</form>
 		</div>
