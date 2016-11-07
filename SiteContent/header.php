@@ -37,11 +37,15 @@
 		}
 	}
 
-
 	if (App_Util::is_old_browser()) {
 		Page()->incl(Page()->bPath . 'browsergate.php');
 		exit;
 	}
+
+	$access_token = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=912881472177929&client_secret=1df53e74749385f22a361e518927b39d&grant_type=client_credentials");
+	if (isset($_GET['testing']))
+		die(print_r($access_token, true));
+	//$event = file_get_contents("https://graph.facebook.com/events/808275699312698/?key=value&amp;access_token=912881472177929|1df53e74749385f22a361e518927b39d");
 ?>
 	<!doctype html>
 	<html lang="en">
