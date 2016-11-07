@@ -1,3 +1,20 @@
+<?php
+$access_token_data = Settings()->get("invite:access_token");
+if (!$access_token_data || $access_token_data["updated"] < time()-3600) {
+	$data = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=912881472177929&client_secret=1df53e74749385f22a361e518927b39d&grant_type=client_credentials");
+	parse_str($data, $token);
+	$access_token_data["token"] = $token["access_token"];
+	$access_token_data["updated"] = time();
+	Settings()->set("invite:access_token",$access_token_data);
+}
+
+/*
+Dosies = attending_count (bildes no šiem)
+Ielūgti = maybe_count + noreply_count
+Ieinteresēti = interested_count
+*/
+$event = file_get_contents("https://graph.facebook.com/808275699312698/?access_token={$access_token_data["token"]}&fields=attending_count,maybe_count,interested_count,noreply_count,attending{first_name,picture{url}}");
+?>
 <section>
 	<div class="container invite-block">
 		<header>
