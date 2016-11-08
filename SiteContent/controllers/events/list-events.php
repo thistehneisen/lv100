@@ -1,6 +1,6 @@
 <?php
 
-	$type = "month";
+	$type = "list";
 	if (isset($_GET["t"]) && in_array($_GET["t"], array("month", "list"))) $type = $_GET["t"];
 	Page()->header();
 ?>
