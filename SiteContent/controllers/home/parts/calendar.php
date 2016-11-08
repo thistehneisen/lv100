@@ -10,7 +10,7 @@
 	$nodes = Page()->getNode(array(
 		"filter"       => $filter,
 		"order"        => array("start" => "ASC"),
-		"returnFields" => "id,title,fullAddress,start,end,category,cover,description",
+		"returnFields" => "id,title,fullAddress,start,end,category,cover,description,subid",
 		"limit"        => array("page" => 0, "perPage" => 9),
 		"debug"        => false
 	));
