@@ -8,197 +8,63 @@
 	<a href="#">Diskusijas</a>
 	<a href="#">Bērniem</a>
 </div>*/ ?>
+<?php
+	$filter = array(
+		"parent"     => Node()->id,
+		"controller" => "events",
+		"view"       => "entry",
+		"enabled"    => 1,
+		"deleted"    => 0,
+		"<SQL>"      => "(DATE(`start`)<=NOW() AND DATE(`end`)>=NOW()) OR DATE(`start`)>NOW()"
+	);
 
+	$nodes = Page()->getNode(array(
+		"filter"       => $filter,
+		"order"        => array("start" => "ASC"),
+		"returnFields" => "id,title,fullAddress,start,end,category,cover,description,subid",
+		"debug"        => false
+	));
 
-<h3>Aprīlis 2017</h3>
+	$months = array();
+	foreach ($nodes as $k => $node) {
+		$month1 = date("Ym",strtotime($node->start));
+		$month2 = date("Ym",strtotime($node->end));
+		for($i = $month1; $i<=$month2; $i++) {
+			$months[$i.""][] = &$nodes[$k];
+		}
+	}
+	//Page()->debug($months);
+?>
+
+<?php foreach ($months as $month => $events) {
+	$monthDate = mktime(0,0,0,substr($month,4,2),1,substr($month,0,4));
+
+	?>
+<h3><?php print(ucfirst(strftime("%B %Y", $monthDate))); ?></h3>
 <article class="masonry">
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>11.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
+	<?php foreach ($events as $node) { ?>
+		<a class="item item-vertical" href="<?php print($node->fullAddress); ?>">
+			<?php if ($node->cover) { ?>
+				<div class="img-ct"><img src="<?php print($this->host . $node->cover); ?>" alt="">
+				</div>
+			<?php } ?>
+			<div class="text-ct">
+				<?php if (!$node->subid) {
+					$ns = strtotime($node->start);
+					$ne = strtotime($node->end);
+					?>
+				<span class="date"><b><?php print(date("j", $ns) . (date("Ym", $ns) == date("Ym", $ne) && date("j", $ns) != date("j", $ne) ? '.-' . date("j", $ne) : '')); ?>.</b> <?php print(strftime("%B", $ns)); ?>
+					<?php if (date("Ym", $ns) != date("Ym", $ne) && date("Ymj", $ns) != date("Ymj", $ne)) { ?>
+						<b> - <?php print(date("j", $ne)); ?>.</b> <?php print(strftime("%B", $ne)); ?><?php } ?>
+				</span>
+				<?php } ?>
+				<h2><?php print($node->title); ?></h2>
+				<?php if ($node->description) { ?>
+					<p><?php print($node->description); ?></p>
+				<?php } ?>
+			</div>
+		</a>
+	<?php } ?>
 
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>12.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>13.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>14.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>17.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
 </article>
-
-
-
-
-
-<h3>Maijs 2017</h3>
-<article class="masonry">
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>11.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>12.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>13.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>14.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>17.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-</article>
-
-
-
-
-<h3>Jūnijs 2017</h3>
-<article class="masonry">
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>11.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>12.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>13.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>14.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item item-vertical" href="event.php">
-		<div class="text-ct">
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-
-	<a class="item play item-vertical" href="event.php">
-		<div class="img-ct"><img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.png" alt=""></div>
-		<div class="text-ct">
-			<span class="date"><b>17.</b> novembris</span>
-			<h2>Lorem ipsum dolor sit amet est  sollicitudin dolor</h2>
-			<p>Quam quis nisl hendrerit, id porttitor elit porta. Duis tristique pellentesque. Aliquam nibh massa, est auctor ut est sit amet, bibendum faucibus eros.</p>
-		</div>
-	</a>
-</article>
+<?php } ?>

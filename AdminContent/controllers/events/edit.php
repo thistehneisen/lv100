@@ -95,6 +95,7 @@
 		$settings["view"] = "entry";
 		$settings["controller"] = Page()->controller;
 		$settings["created_by"] = "controller";
+		$settings["subid"] = (int)$_POST["subid"];
 		$settings["tags"] = array_map('trim', explode(",", $_POST["tags"]));
 		$settings["show_on_first"] = $_POST["show_on_first"] == 1 ? 1 : 0;
 
@@ -120,6 +121,7 @@
 		// Extra parsing
 		$extra = false;
 		foreach ((array)$_POST['extra_values'] as $i => $title) {
+			if (empty($title)) continue;
 			$extra[ $i ]["value"] = $_POST['extra_values'][ $i ];
 		}
 		$node->data->extra = $extra;
@@ -244,8 +246,8 @@
 				<div class="col-xs-12">
 					<p class="help-block">Ja pasākums norisinās visu dienu, tad sākuma laiku norādīt
 						<b>00:00</b> un beigu laiku —
-						<b>23:59</b>. <br>Ja nepieciešams norādīt tikai sākuma laiku, tad beigu laikā jāatstāj <b>23:59</b>.
-					</p>
+						<b>23:59</b>. <br>Ja nepieciešams norādīt tikai sākuma laiku, tad beigu laikā jāatstāj
+						<b>23:59</b>. </p>
 				</div>
 			</div>
 		</section>
@@ -257,22 +259,24 @@
 			<ol id="extra-values">
 				<?php
 					$extra = $node->data->extra;
-					foreach ((array)$extra as $e) { ?>
-						<li class="form-horizontal">
-							<div class="form-group form-custom-1">
-								<div class="col-xs-12" >
-									<div class="input-group">
-										<input type="text" name="extra_values[]" class="form-control" placeholder="" value="<?php echo htmlspecialchars($e->value) ?>">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-default delete remove-extra">
-												<span class="glyphicon glyphicon-remove"></span>
-											</button>
-										</span>
+					if ($extra) {
+						foreach ((array)$extra as $e) { ?>
+							<li class="form-horizontal">
+								<div class="form-group form-custom-1">
+									<div class="col-xs-12">
+										<div class="input-group">
+											<input type="text" name="extra_values[]" class="form-control" placeholder="" value="<?php echo htmlspecialchars($e->value) ?>">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default delete remove-extra">
+													<span class="glyphicon glyphicon-remove"></span>
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
-							</div>
-						</li>
-					<?php } ?>
+							</li>
+						<?php }
+					} ?>
 			</ol>
 			<a href="javascript:;" id="add-extra" class="addbutton">Pievienot</a>
 		</section>
@@ -305,6 +309,22 @@
 			</div>
 			<a href="#" class="addbutton" id="file-add">Pievienot failu / saiti</a>
 		</section>*/ ?>
+		<?php /*<section>
+			<h1>Saistītie notikumi</h1>
+			<ol>
+				<li>Lorem ipsum
+					<a href="#" class="remove pull-right"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li>Lorem ipsum
+					<a href="#" class="remove pull-right"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li>Lorem ipsum
+					<a href="#" class="remove pull-right"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li>Lorem ipsum
+					<a href="#" class="remove pull-right"><span class="glyphicon glyphicon-remove"></span></a></li>
+			</ol>
+			<div class="text-right">
+				<a href="#" id="add-rel-event" class="addbutton">Pievienot notikumu</a>
+			</div>
+		</section>*/ ?>
 
 	</div>
 	<div class="col-sidebar">
@@ -331,17 +351,21 @@
 								"order"        => array("sort" => "ASC"),
 								"returnFields" => "fullAddress,id,title"
 							));
-							?>
-							<div class="form-group">
+							?><?php /*<div class="form-group">
 								<label for="parent" style="display: block;">Sadaļa:</label>
 								<select id="parent" name="parent" class="form-control">
 									<?php foreach ($childs as $child) { ?>
 										<option value="<?php print($child->id); ?>" data-url="<?php Page()->e($child->fullAddress, 1); ?>"><?php Page()->e($child->title, 1); ?></option>
 									<?php } ?>
 								</select>
-							</div>
-						<?php } ?>
+							</div>*/ ?><?php } ?>
 
+						<div class="form-group form-horizontal">
+							<label class="control-label" for="subid">Nerādīt norises datumu:</label>
+							<span class="pull-right">
+								<input type="checkbox" class="selector" <?= ($node && $node->subid ? "checked" : "") ?> id="subid" name="subid" value="1">
+							</span>
+						</div>
 						<div class="form-group form-horizontal">
 							<label class="control-label" for="published">Publicēt:</label>
 							<span class="pull-right">
@@ -433,7 +457,6 @@
 	</div>
 </div>
 
-
 <div id="extra-markup" style="display: none;">
 	<li class="form-horizontal">
 		<div class="form-group form-custom-1">
@@ -489,9 +512,9 @@
 			e.preventDefault();
 			var imgEditor = new imgEditTool($(this).data("opts")).open(function() {
 				this.cropToolInit({
-					cancel: function() {
+					cancel : function() {
 						this.close();
-					}, save    : function(data) {
+					}, save: function(data) {
 						that = this;
 						$.getJSON(<?php Page()->e(Page()->host . "media.upload/?raw_crop=1", 3)?>+'&session=' + Settings.session_id, {
 							i: data.i,
@@ -870,6 +893,32 @@
 
 	#fb-share-pic-content:hover .btn.delete2 {
 		display: block;
+	}
+
+	ol li {
+		padding-top: 7px;
+		padding-bottom: 5px;
+	}
+
+	.remove {
+		color: red;
+		margin-right: 5px;
+	}
+
+	.remove:hover {
+		color: red;
+	}
+
+	ol li .remove {
+		display: none;
+	}
+
+	ol li:hover .remove {
+		display: block;
+	}
+
+	ol li:hover {
+		background: #eaeaea;
 	}
 
 </style>

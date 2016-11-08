@@ -10,7 +10,7 @@
 	$nodes = Page()->getNode(array(
 		"filter"       => $filter,
 		"order"        => array("start" => "ASC"),
-		"returnFields" => "id,title,fullAddress,start,end,category,cover",
+		"returnFields" => "id,title,fullAddress,start,end,category,cover,description",
 		"limit"        => array("page" => 0, "perPage" => 9),
 		"debug"        => false
 	));
@@ -33,10 +33,12 @@
 						</div>
 					<?php } ?>
 					<div class="text-ct">
+						<?php if (!$node->subid) { ?>
 						<span class="date"><b><?php print(date("j", $ns) . (date("Ym", $ns) == date("Ym", $ne) && date("j", $ns) != date("j", $ne) ? '.-' . date("j", $ne) : '')); ?>.</b> <?php print(strftime("%B", $ns)); ?>
 							<?php if (date("Ym", $ns) != date("Ym", $ne) && date("Ymj", $ns) != date("Ymj", $ne)) { ?>
-								<b> - <?php print(date("j", $ne)); ?></b> <?php print(strftime("%B", $ne)); ?><?php } ?>
+								<b> - <?php print(date("j", $ne)); ?>.</b> <?php print(strftime("%B", $ne)); ?><?php } ?>
 						</span>
+						<?php } ?>
 						<h2><?php print($node->title); ?></h2>
 						<?php if ($node->description) { ?>
 							<p><?php print($node->description); ?></p>

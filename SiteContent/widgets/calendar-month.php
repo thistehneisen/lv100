@@ -44,7 +44,7 @@
 		"view"       => "entry",
 		"enabled"    => 1,
 		"deleted"    => 0,
-		"<SQL>"      => "(DATE(`start`)<='" . $sqlStart . "' AND DATE(`end`)>='" . $sqlStart . "') OR (DATE(`start`)>'" . $sqlStart . "' AND DATE(`start`)<='" . $sqlEnd . "')"
+		"<SQL>"      => "`subid`!=1 AND ((DATE(`start`)<='" . $sqlStart . "' AND DATE(`end`)>='" . $sqlStart . "') OR (DATE(`start`)>'" . $sqlStart . "' AND DATE(`start`)<='" . $sqlEnd . "'))"
 	);
 
 	$nodes = Page()->getNode(array(

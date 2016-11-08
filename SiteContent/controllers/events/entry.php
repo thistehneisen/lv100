@@ -17,24 +17,25 @@
 							<p><b>Vieta:</b> <?php print(Node()->data->place->name); ?></p>
 						</span>
 					<?php } ?>
-					<span>
-						<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-calendar1.svg'); ?></div>
-						<p>
-							<b>Datums:</b><?php print(date("d.m.Y", strtotime(Node()->start))); ?><?php if (date("d.m.Y", strtotime(Node()->start)) != date("d.m.Y", strtotime(Node()->end))) { ?> — <?php print(date("d.m.Y", strtotime(Node()->end))); ?><?php } ?>
-						</p>
-					</span>
-					<?php if (date("H:i", strtotime(Node()->start)) != "00:00") { ?>
+					<?php if (!Node()->subid) { ?>
 						<span>
-							<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-clock.svg'); ?>
-							</div>
+							<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-calendar1.svg'); ?></div>
 							<p>
-								<b>Laiks:</b><?php print(date("H:i", strtotime(Node()->start))); ?><?php if (date("H:i", strtotime(Node()->end)) != "23:59") { ?> — <?php print(date("H:i", strtotime(Node()->end))); ?><?php } ?>
+								<b>Datums:</b><?php print(date("d.m.Y", strtotime(Node()->start))); ?><?php if (date("d.m.Y", strtotime(Node()->start)) != date("d.m.Y", strtotime(Node()->end))) { ?> — <?php print(date("d.m.Y", strtotime(Node()->end))); ?><?php } ?>
 							</p>
 						</span>
-					<?php } ?>
+						<?php if (date("H:i", strtotime(Node()->start)) != "00:00") { ?>
+							<span>
+								<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-clock.svg'); ?>
+								</div>
+								<p>
+									<b>Laiks:</b><?php print(date("H:i", strtotime(Node()->start))); ?><?php if (date("H:i", strtotime(Node()->end)) != "23:59") { ?> — <?php print(date("H:i", strtotime(Node()->end))); ?><?php } ?>
+								</p>
+							</span>
+						<?php } ?><?php } ?>
 				</div>
 
-				<?php if (Node()->data->extra) { ?>
+				<?php if (Node()->data->extra && count(Node()->data->extra)) { ?>
 					<div class="event-notes">
 						<?php foreach ((array)Node()->data->extra as $e) { ?>
 							<div class="note"><p><?php print($e->value); ?></p></div>

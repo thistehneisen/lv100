@@ -1,15 +1,15 @@
 <?php
 
-	$type = "calendar";
-	if (isset($_GET["t"]) && in_array($_GET["t"], array("calendar", "list"))) $type = $_GET["t"];
+	$type = "month";
+	if (isset($_GET["t"]) && in_array($_GET["t"], array("month", "list"))) $type = $_GET["t"];
 	Page()->header();
 ?>
 
-<div class="container calendar-month">
+<div class="container calendar-<?php print($type); ?>">
 	<h1 class="calendar-switch">
 		<span><?php print(Node()->title); ?></span>
 		<div class="switches">
-			<a class="<?php print($type == "calendar" ? "active" : ""); ?>" href="<?php print(Page()->getURL(array("t"=>"calendar"))); ?>">
+			<a class="<?php print($type == "month" ? "active" : ""); ?>" href="<?php print(Page()->getURL(array("t"=>"month"))); ?>">
 				<div class="ico"><?php include(Page()->bPath . 'assets/img/ico/ico-calendar1.svg'); ?></div>
 				<span>Mēneša skats</span></a>
 			<a class="<?php print($type == "list" ? "active" : ""); ?>" href="<?php print(Page()->getURL(array("t"=>"list"))); ?>">
