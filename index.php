@@ -53,9 +53,10 @@
 		),
 
 		"FacebookApp" => array(
-			"id"       => "...",
-			"secret"   => "...",
-			"endpoint" => "https://graph.facebook.com"
+			"id"       => "912881472177929",
+			"secret"   => "1df53e74749385f22a361e518927b39d",
+			"endpoint" => "https://graph.facebook.com",
+			"eventId" => "808275699312698"
 		),
 
 		"TwitterApp" => array(

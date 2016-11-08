@@ -1,7 +1,7 @@
 <?php
 $access_token_data = Settings()->get("invite:access_token");
 if (!$access_token_data || $access_token_data["updated"] < time()-3600) {
-	$data = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=912881472177929&client_secret=1df53e74749385f22a361e518927b39d&grant_type=client_credentials");
+	$data = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=".Page()->FacebookApp["id"]."&client_secret=".Page()->FacebookApp["secret"]."&grant_type=client_credentials");
 	parse_str($data, $token);
 	$access_token_data["token"] = $token["access_token"];
 	$access_token_data["updated"] = time();
@@ -13,7 +13,15 @@ Dosies = attending_count (bildes no šiem)
 Ielūgti = maybe_count + noreply_count
 Ieinteresēti = interested_count
 */
-$event = json_decode(file_get_contents("https://graph.facebook.com/808275699312698/?access_token={$access_token_data["token"]}&fields=attending_count,maybe_count,interested_count,noreply_count,attending{first_name,picture{url}}"));
+$eventData = Settings()->get("invite:event");
+if (!$eventData || $eventData["updated"] < time()-60) {
+	$event = json_decode(file_get_contents("https://graph.facebook.com/" . Page()->FacebookApp["eventId"] . "/?access_token={$access_token_data["token"]}&fields=attending_count,maybe_count,interested_count,noreply_count,attending{first_name,picture{url}}"));
+	$eventData["event"] = $event;
+	$eventData["updated"] = time();
+	Settings()->set("invite:event",$eventData);
+}
+	$event = json_decode(json_encode($eventData["event"]));
+
 ?>
 <section>
 	<div class="container invite-block">
@@ -47,10 +55,10 @@ $event = json_decode(file_get_contents("https://graph.facebook.com/8082756993126
 					</div>
 				</div>
 
-				<p class="going"><b>Paula,</b> <b>Diāna</b> un <b>47 citi draugi</b> dosies</p>
+				<p class="going"><b><?php print(join("</b>, <b>",array_map(function($n){ return $n->first_name; },array_slice($people,0,3)))."</b> un <b>".($event->attending_count-3)." citi</b> dosies..."); ?></p>
 				<div class="lg-1-1">
-					<a href="#" class="cta cta-go">Došos</a>
-					<a href="#" class="cta cta-invite"><?php include( Page()->bPath.'assets/img/ico/fancy-arrow-right.svg'); ?>Ielūgt citus</a>
+					<a href="https://www.facebook.com/events/<?php print(Page()->FacebookApp["eventId"]); ?>/" class="cta cta-go">Došos</a>
+					<a href="https://www.facebook.com/events/<?php print(Page()->FacebookApp["eventId"]); ?>/" class="cta cta-invite"><?php include( Page()->bPath.'assets/img/ico/fancy-arrow-right.svg'); ?>Ielūgt citus</a>
 				</div>
 			</div>
 
