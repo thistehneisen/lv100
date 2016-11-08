@@ -22,17 +22,20 @@ if (!$eventData || $eventData["updated"] < time()-60) {
 }
 	$event = json_decode(json_encode($eventData["event"]));
 
+
+	$fpage = Settings("first_page_data");
+
 ?>
 <section>
 	<div class="container invite-block">
 		<header>
-			<h2>Latvija tevi ielūdz svinēt</h2>
-			<p class="lead">Nulla pretium vulputate elit ac faucibus. Curabitur quis lacinia ligula. Aliquam felis nulla, tincidunt sed eleifend id, feugiat a augue. Maecenas hendrerit convallis blandit. Suspendisse ullamcorper, neque vel tristique ullamcorper.</p>
+			<h2><?php print($fpage["cb"]["title"]); ?></h2>
+			<p class="lead"><?php print($fpage["cb"]["description"]); ?></p>
 		</header>
 
-		<a class="video play youtube-player lg-3-5 sm-1-2 xs-1-1" href="https://youtu.be/LL998ajnjN4">
+		<a class="<?php print(preg_match("#youtu(\.be|be\.com)#", $fpage["cb"]["address"]) ? 'youtube-player play' : ''); ?> video lg-3-5 sm-1-2 xs-1-1" href="<?php print($fpage["cb"]["address"]); ?>">
 			<span class="img-ct">
-				<img src="<?php print(Page()->bHost); ?>assets/img/placeholder-rect.svg">
+				<img src="<?php print(Page()->host); ?><?php print($fpage["cb"]["picture"]); ?>">
 			</span>
 		</a>
 		<div class="lg-2-5 sm-1-2 xs-1-1 desc">
