@@ -104,7 +104,8 @@
 		<ul class="actions">
 			<?php if (ActiveUser()->can(Page()->controller, "mainīt izvēlni")) { ?>
 				<li><a href="<?php echo Page()->aHost . Page()->controller ?>/menu/">Lapas izvēlne</a></li><?php } ?>
-
+			<?php if (ActiveUser()->can(Page()->controller, "1. lapas saturs")) { ?>
+				<li><a href="<?php echo Page()->aHost . Page()->controller ?>/first-page/">1. lapas saturs</a></li><?php } ?>
 		</ul>
 	</nav>
 	<div>
