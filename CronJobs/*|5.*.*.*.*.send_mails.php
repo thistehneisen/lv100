@@ -1,5 +1,5 @@
 <?php
-
+	return; // DISABLED
 	set_time_limit(0);
 	Page()->cronLog("Race started.");
 
