@@ -1,7 +1,7 @@
 <?php
 
 	$access_token_data = Settings()->get("invite:access_token");
-	if (!$access_token_data || $access_token_data["updated"] < time() - 3600) {
+	if (!$access_token_data || $access_token_data["updated"] < time() - 1200) {
 		$data = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . Page()->FacebookApp["id"] . "&client_secret=" . Page()->FacebookApp["secret"] . "&grant_type=client_credentials");
 		parse_str($data, $token);
 		$access_token_data["token"] = $token["access_token"];
