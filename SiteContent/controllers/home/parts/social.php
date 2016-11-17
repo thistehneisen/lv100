@@ -1,3 +1,13 @@
+<?php
+$access_token_data = Settings()->get("invite:access_token");
+
+/*
+	Facebook hashtag retrieval
+*/
+$hashtags['facebook'] = file_get_contents("https://graph.facebook.com/search?access_token=".$access_token_data["token"]."&type=post&q=%23lv100");
+if (isset($_GET['test']))
+	die(print_r($hashtags["facebook"], true));
+?>
 <section>
 	<div class="container social-feed">
 		<header>
